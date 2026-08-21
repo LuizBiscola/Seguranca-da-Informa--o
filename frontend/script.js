@@ -1,17 +1,15 @@
+const nomeInput = document.getElementById('nome');
 const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
+const senhaInput = document.getElementById('senha');
 
-async function postData(){
-    const email = emailInput.value;
-    const password = passwordInput.value;
-
+async function login(){
     const body = {
-        email: email,
-        password: password
+        email: document.getElementById('email').value,
+        senha: document.getElementById('senha').value
     }
 
     try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('http://localhost:8080/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -27,9 +25,32 @@ async function postData(){
     }
 }
 
-async function getData(){
+async function cadastro(){
+    const body = {
+        nome: document.getElementById('nome').value,
+        email: document.getElementById('email').value,
+        senha: document.getElementById('senha').value
+    }
+
     try {
-        const response = await fetch('http://localhost:3000/data', {
+        const response = await fetch('http://localhost:8080/cadastro', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+        if (!response.ok) {
+            throw new Error('Erro na solicitação: ' + response.status);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function buscarUsuarios(){
+    try {
+        const response = await fetch('http://localhost:8080/usuarios', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -54,14 +75,14 @@ carregarGrid = (data) =>  {
 
     tableBody.innerHTML = '';
 
-    const rowTemplate = `
-        <tr>
-            <td>${name}</td>
-            <td>${email}</td>
-        </tr>
-    `;
-
     data.forEach((item) => {
+        const rowTemplate = `
+            <tr>
+                <td>${item.id}</td>
+                <td>${item.nome}</td>
+                <td>${item.email}</td>
+            </tr>
+        `;
         tableBody.insertAdjacentHTML('beforeend', rowTemplate);
     });
 }

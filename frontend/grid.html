@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid - Login</title>
+    <title>Grid - Usuarios</title>
     <script src="script.js"></script>
 </head>
-<body>
-    <h1>Grid - Login</h1>
+<body onload="buscarUsuarios()">
+    <h1>Grid - Usuarios</h1>
 
     <div>
         <h1>Lista de Usuários</h1>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Email</th>
-            </tr>
-        </thead>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
 
-        <tbody id="tableBody">
-        </tbody>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
